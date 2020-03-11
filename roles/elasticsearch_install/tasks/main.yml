@@ -1,0 +1,47 @@
+---
+- name: Install java version
+  yum:
+    name: java-1.8.0-openjdk.x86_64
+    state: latest
+  notify: Check if java is installed
+
+#- name: Check if java is installed
+#  command: java -version
+  #become_user: '{{ global_vars.user_session }}' // your user session
+#  register: java_result
+#  ignore_errors: True
+
+#- name: Check if java failed
+#  debug:
+#    msg: "Failed - Java is not installed"
+#  when: "{{ java_result }} is failed"
+
+#- name: Check if java is success
+#  debug:
+#    msg: "Success - Java is installed"
+#  when:  java_result is success
+
+- name: Add Elasticsearch GPG key.
+  rpm_key:
+    key: https://packages.elastic.co/GPG-KEY-elasticsearch
+    state: present
+
+- name: Add Elasticsearch yum repository.
+  template:
+    src: elasticsearch.repo.j2
+    dest: /etc/yum.repos.d/elasticsearch.repo
+    mode: 0644
+
+- name: Install Elasticsearch.
+  yum:
+    name: elasticsearch
+    state: installed
+
+- name: Configure Elasticsearch.
+  template:
+    src: elasticsearch.yml.j2
+    dest: /etc/elasticsearch/elasticsearch.yml
+    owner: root
+    group: elasticsearch
+    mode: 0750
+  notify: restart elasticsearch

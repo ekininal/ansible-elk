@@ -1,0 +1,33 @@
+# {{ ansible_managed }}
+
+# ---------------------------------- Cluster -----------------------------------
+#cluster.name: my-application
+# ------------------------------------ Node ------------------------------------
+#node.name: node-1
+#node.attr.rack: r1
+node.name: ${HOSTNAME}
+node.master: true
+node.data: true
+# ----------------------------------- Paths ------------------------------------
+path.data: /var/lib/elasticsearch
+path.logs: /var/log/elasticsearch
+#path.repo: /home/elasticsearch/backup
+# ----------------------------------- Memory -----------------------------------
+#bootstrap.memory_lock: true
+# ---------------------------------- Network -----------------------------------
+http.port: 9200
+#transport.tcp.port: 9300
+network.host: 0.0.0.0
+# --------------------------------- Discovery ----------------------------------
+discovery.seed_hosts: ${HOSTNAME}
+cluster.initial_master_nodes: ${HOSTNAME}
+# ---------------------------------- Gateway -----------------------------------
+#gateway.recover_after_nodes: 3
+# ---------------------------------- Various -----------------------------------
+#action.destructive_requires_name: true
+# ---------------------------------- X-Pack -----------------------------------
+xpack.security.enabled: true
+xpack.security.transport.ssl.enabled: true
+#xpack.security.transport.ssl.verification_mode: certificate
+#xpack.security.transport.ssl.keystore.path: elastic-certificate.p12
+#xpack.security.transport.ssl.truststore.path: elastic-certificate.p12

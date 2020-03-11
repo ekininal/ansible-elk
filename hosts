@@ -1,0 +1,29 @@
+
+[control]
+#172.27.58.11
+#localhost
+127.0.0.1
+
+[webserver]
+172.27.58.12
+172.27.58.13
+
+[loadbalancer]
+172.27.58.15
+
+[nodes:children]
+webserver
+loadbalancer
+control
+
+#[control:vars]
+#ansible_ssh_user = root
+#ansible_ssh_private_key_file = /root/.ssh/id_rsa
+
+#[webserver:vars]
+#ansible_ssh_user = root
+#ansible_ssh_private_key_file = /root/.ssh/id_rsa
+
+[nodes:vars]
+ansible_ssh_user = root
+ansible_ssh_private_key_file = /root/.ssh/id_rsa
