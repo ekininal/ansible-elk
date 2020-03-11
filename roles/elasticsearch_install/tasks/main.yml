@@ -5,22 +5,6 @@
     state: latest
   notify: Check if java is installed
 
-#- name: Check if java is installed
-#  command: java -version
-  #become_user: '{{ global_vars.user_session }}' // your user session
-#  register: java_result
-#  ignore_errors: True
-
-#- name: Check if java failed
-#  debug:
-#    msg: "Failed - Java is not installed"
-#  when: "{{ java_result }} is failed"
-
-#- name: Check if java is success
-#  debug:
-#    msg: "Success - Java is installed"
-#  when:  java_result is success
-
 - name: Add Elasticsearch GPG key.
   rpm_key:
     key: https://packages.elastic.co/GPG-KEY-elasticsearch

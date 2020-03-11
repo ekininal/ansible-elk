@@ -1,0 +1,39 @@
+---
+- name: Install java and check version
+  yum:
+    name: java-1.8.0-openjdk.x86_64
+    state: latest
+  notify: Check if java is installed
+
+- name: Add Kibana GPG key
+  rpm_key:
+    key: https://packages.elastic.co/GPG-KEY-elasticsearch
+    state: present
+
+- name: Add Kibana yum repository.
+  template:
+    src: kibana.repo.j2
+    dest: /etc/yum.repos.d/kibana.repo
+    mode: 0644
+
+- name: Install Kibana
+  yum: 
+    name: kibana
+    state: installed
+
+- name: Configure Kibana yaml
+  template:
+    src: kibana.yml.j2
+    dest: /etc/kibana/kibana.yml
+    owner: root
+    group: kibana
+    mode: 0750
+  notify: restart kibana
+
+- name: Allow TCP port
+  firewalld:
+    port: "{{ kibana_port }}/tcp"
+    permanent: true
+    state: enabled
+
+  
