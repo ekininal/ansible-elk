@@ -1,9 +1,8 @@
 # {{ ansible_managed }}
 
-server.port: 5601
-server.host: "0.0.0.0"
-#server.name: "elasticsearch-01.example.com"
-elasticsearch.hosts: ["http://172.27.58.11:9200"]
+server.port: {{ kibana_server_port }}
+server.host: {{ kibana_server_host }}
+elasticsearch.hosts: {{ elasticsearch_hosts }}
 xpack.security.enabled: true
-elasticsearch.username: kibana
-elasticsearch.password: KVS1lab!@#
+elasticsearch.username: {{ elastic_user }}
+elasticsearch.password: {{ elastic_passw }}

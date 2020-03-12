@@ -1,0 +1,19 @@
+---
+
+- name: restart logstash
+  service: name=logstash state=restarted
+
+- name: Check if java is installed
+  command: java -version
+  register: java_result
+  ignore_errors: True
+
+- name: Check if java failed
+  debug:
+    msg: "Failed - Java is not installed"
+  when: "{{ java_result }} is failed"
+
+- name: Check if java is success
+  debug:
+    msg: "Success - Java is installed"
+  when:  java_result is success

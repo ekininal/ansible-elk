@@ -2,3 +2,8 @@
 
 kibana_version: 7.x
 kibana_port: 5601
+kibana_server_port: 5601
+kibana_server_host: "0.0.0.0"
+elasticsearch_hosts: ["http://172.27.58.11:9200"]
+elastic_user: elastic
+elastic_passw: KVS1lab!@#

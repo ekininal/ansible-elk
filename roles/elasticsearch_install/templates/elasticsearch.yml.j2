@@ -9,15 +9,15 @@ node.name: ${HOSTNAME}
 node.master: true
 node.data: true
 # ----------------------------------- Paths ------------------------------------
-path.data: /var/lib/elasticsearch
-path.logs: /var/log/elasticsearch
+path.data: {{ path_data }}
+path.logs: {{ path_logs }}
 #path.repo: /home/elasticsearch/backup
 # ----------------------------------- Memory -----------------------------------
 #bootstrap.memory_lock: true
 # ---------------------------------- Network -----------------------------------
-http.port: 9200
+http.port: {{ http_port }}
 #transport.tcp.port: 9300
-network.host: 0.0.0.0
+network.host: {{ network_host }}
 # --------------------------------- Discovery ----------------------------------
 discovery.seed_hosts: ${HOSTNAME}
 cluster.initial_master_nodes: ${HOSTNAME}

@@ -1,3 +1,7 @@
 ---
 
 elasticsearch_major_version: 7.x
+path_data: /var/lib/elasticsearch
+path_logs: /var/log/elasticsearch
+http_port: 9200
+network_host: 0.0.0.0

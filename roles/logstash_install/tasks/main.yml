@@ -1,0 +1,35 @@
+---
+- name: Install java version
+  yum:
+    name: java-1.8.0-openjdk.x86_64
+    state: latest
+  notify: Check if java is installed
+
+- name: Add Logstash GPG key.
+  rpm_key:
+    key: https://packages.elastic.co/GPG-KEY-elasticsearch
+    state: present
+
+- name: Add Logstash yum repository.
+  template:
+    src: elasticsearch.repo.j2
+    dest: /etc/yum.repos.d/elasticsearch.repo
+    mode: 0644
+
+- name: Install Logstash.
+  yum: 
+    name: logstash
+    state: installed
+
+- name: Allow traffic through logstash TCP port in your firewall
+  firewalld:
+    port: "{{ logstash_port }}/tcp"
+    permanent: true
+    state: enabled
+
+- name: Start Logstash.
+  service: 
+    name: logstash 
+    state: restarted
+    enabled: yes
+  ignore_errors: true
