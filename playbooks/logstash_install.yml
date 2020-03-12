@@ -1,0 +1,7 @@
+---
+- hosts: 172.27.58.15
+  become: true
+  become_user: root
+  gather_facts: false
+  roles:
+    - logstash_install 
