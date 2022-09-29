@@ -1,0 +1,21 @@
+# Do not change version. This is the version of aws buildspec, not the version of your buldspec file.
+# added line for testing
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16.14
+    commands:
+      - echo Installing NPM...
+      - npm install -g npm@8.5.0
+  pre_build:
+    commands:
+      - echo Installing source NPM dependencies...
+      - npm version
+  post_build:
+    commands:
+      - echo Build completed on `date`
+# Include only the files required for your application to run.
+artifacts:
+  files:
+    - playbooks/
